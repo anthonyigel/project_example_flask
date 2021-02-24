@@ -1,0 +1,27 @@
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style_v1.css') }}">
+
+<nav class="topbar">
+    <a href="/"><img src="{{ url_for('static', filename='images/8451_logo.png') }}" class="logo" /></a>
+
+    {% if request.path != '/' %}
+      {% set ns = namespace(top_bar_drawn=False) %}
+      {% for m in materials %}
+        {% if m.link == request.path %}
+          {% set ns.top_bar_drawn = True %}
+          <mds-tabs aslinks selectedIndex={{loop.index0}}>
+            {% for material in materials %}
+            <mds-tabs-label href="{{ material.link }}" slot="tab">{{ material.name }}</mds-tabs-label>
+            {% endfor %}
+          </mds-tabs>
+        {% endif %}
+      {% endfor %}
+
+    {% if ns.top_bar_drawn == False %}
+      <mds-tabs aslinks selectedIndex=-1>
+        {% for material in materials %}
+          <mds-tabs-label href="{{ material.link }}" slot="tab">{{ material.name }}</mds-tabs-label>
+        {% endfor %}
+      </mds-tabs>
+    {% endif %}
+  {% endif %}
+</nav>
