@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en">
+<head> <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_v1.css') }}">
+
+
+    <!-- Meridian -->
+    <script src="https://e451-meridiancdn-0006-p-cdn.azureedge.net/e451meridiancdn0006/@meridian/web@3.1.0/dist/web/web.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://e451-meridiancdn-0006-p-cdn.azureedge.net/e451meridiancdn0006/@meridian/web@3.1.0/dist/web/slim-reset.css"/>
+    <link rel="stylesheet" type="text/css" href="https://e451-meridiancdn-0006-p-cdn.azureedge.net/e451meridiancdn0006/@meridian/web@3.1.0/dist/web/web.css"/>
+
+    <title>{%  block webtitle %}{%  endblock %}</title>
+
+</head>
+
+
+
+<header>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+    <div class="container-fluid">
+        <div class="row justify-content-start" id="header_row">
+            <div class="col-11">
+                <!-- Menu list -->
+                <ul class="list-inline">
+                    <li class="list-inline-item"> <p id="header_menu_title">{% block title %}{%  endblock %}</p></li>
+                    <li class="list-inline-item"><a href="{{ url_for('home') }}"> <p id="header_menu_item">Home</p></a></li>
+                    <li class="list-inline-item"><a href="{{ url_for('instructions') }}"> <p id="header_menu_item">Instructions</p></a></li>
+                    <li class="list-inline-item"><a href = "mailto:anthony.igel@8451.com?subject = Feedback&body = Message"> <p id="header_menu_item">Questions?</p> </a></li>
+                </ul>
+            </div>
+            <div class="col-1">
+                <img src="{{ url_for('static', filename='images/8451_logo.png') }}"
+                     alt="84.51"
+                     width=auto
+                     height="25"
+                     id="mylogo"
+                     class="mylogo">
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<br>
+
+<!--- Body Content -->
+<body>
+<div class="container-fluid content">
+    <div class="row justify-content-start" id="body_row">
+        <div class="col-12">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+
+<br>
+
+
+
+<!--- Footer -->
+<div class="container-fluid">
+      <div class="row justify-content-start" id="footer_row">
+          <footer class="footer">
+              <div class="col-12">
+                  <p>84.51 &deg; </p>
+              </div>
+          </footer>
+      </div>
+</div>
+</html>
