@@ -1,0 +1,85 @@
+<!-- Layout Preset -->
+{% extends "web/layout_v1.html" %}
+{% block webtitle %}
+    Demand Groups Upload Portal
+{% endblock %}
+{% block title %}
+    Demand Group Instructions
+{% endblock %}
+{% block content %}
+
+
+
+
+    <div class="container-fluid"> <!--- Body Content -->
+
+        <section id="instructions-accordion">
+            <div class="accordion" id="accordionExample"> <!--- Start accordion card content -->
+                <div class="card"> <!--- Card 1 -->
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <p>Step 1</p>
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Evaluate Commodity | Sub-Commodity relationships with no Demand Groups against available Demand Groups</p>
+                        </div>
+                    </div>
+                </div> <!--- End of Card 1 -->
+
+                <div class="card"> <!--- Card 2 -->
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <p>Step 2</p>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Based upon the Sub-Commodity description determine if the orphaned Commodity | Sub-Commodity can be added to an existiing Demand Group or if a new Demand Group should be created.</p>
+                            <p>     If you create a new Demand Group, the code must be unique (the placeholder text is the code which should be used). </p>
+                        </div>
+                    </div>
+                </div> <!--- End of Card 2 -->
+
+                <div class="card"> <!--- Card 3 -->
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <p>Step 3</p>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Once you decide on the Demand Group code and description, click "Submit" </p>
+                        </div>
+                    </div>
+                </div> <!--- End of Card 3 -->
+
+                <div class="card"> <!--- Card 4 -->
+                    <div class="card-header" id="headingFour">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <p>Step 4</p>
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>All orphan Demand Groups must be assigned before submitting for final QA </p>
+                        </div>
+                    </div>
+                </div> <!--- End of Card 4 -->
+            </div> <!--- End of accordion cards -->
+        </section> <!--- End of accordion section -->
+    </div> <!--- End of body content -->
+
+
+
+{% endblock %}
