@@ -1,0 +1,17 @@
+{% extends "web/layout_v1.html" %}
+{% block webtitle %}
+    Demand Groups
+{% endblock %}
+{% block title %}
+    Demand Group Upload Portal
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+    <p>
+        Thank you for submitting Demand Group data for {{ month_submission }} <br>
+    </p>
+
+    <img src="{{ url_for('static', filename='images/upload_success.gif') }}"
+         alt="success">
+    </div>
+{% endblock %}
