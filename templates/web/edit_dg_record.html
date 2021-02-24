@@ -1,0 +1,365 @@
+<!-- Layout Preset -->
+{% extends "web/layout_v1.html" %}
+{% block webtitle %}
+    Demand Groups Upload Portal
+{% endblock %}
+{% block title %}
+    Demand Group Upload Portal
+{% endblock %}
+{% block content %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+
+<!--- Import child records -->
+<script>
+
+
+  $(()=>{
+      // Load Data in JS
+      // new_dg_data row data
+      {% autoescape off %}
+      var child_df = {{ child_df | safe}};
+      {% endautoescape %};
+
+
+      // Create bootstrap table of data
+      $('#dg_child_table').bootstrapTable({
+          data: child_df,
+          icons: {
+              refresh: 'fa fa-refresh',
+              toggle: 'fa fa-th-list',
+              columns: 'fa fa-columns',
+              detailOpen: 'fa fa-plus-circle',
+              detailClose: 'fa fa-minus-circle'
+          },
+          columns: [{
+              field: 'id',
+              title: 'ID'
+          },{
+              field: 'stage',
+              title: 'Stage'
+          }, {
+              field: 'pid_fyt_pmy_dpt_cd',
+              title: 'Primary Department'
+          }, {
+              field: 'pid_fyt_pmy_dpt_dsc_tx',
+              title: 'Primary Department Description'
+          }, {
+              field: 'pid_fyt_rec_dpt_cd',
+              title: 'Recap Department'
+          }, {
+              field: 'pid_fyt_rec_dpt_dsc_tx',
+              title: 'Recap Department Description'
+          }, {
+              field: 'pid_fyt_sub_dpt_cd',
+              title: 'Sub-Department'
+          }, {
+              field: 'pid_fyt_sub_dpt_dsc_tx',
+              title: 'Sub-Department Description'
+          }, {
+              field: 'pid_fyt_com_cd',
+              title: 'Commodity'
+          }, {
+              field: 'pid_fyt_com_dsc_tx',
+              title: 'Commodity Description'
+          }, {
+              field: 'pid_fyt_sub_com_cd',
+              title: 'Sub-Commodity'
+          }, {
+              field: 'pid_fyt_sub_com_dsc_tx',
+              title: 'Sub-Commodity Description'
+          },  {
+              field: 'demand_group_code',
+              title: 'Demand Group Code',
+              editable: {
+                  type: 'text',
+                  mode: 'inline'
+              }
+          }, {
+              field: 'demand_group_dsc',
+              title: 'Demand Group Description',
+              editable: {
+                  type: 'textarea',
+                  mode: 'inline'
+              }
+          }]
+    });
+
+
+
+  })
+
+</script>
+
+
+<!--- import parent records -->
+<script>
+
+
+  $(()=>{
+      // Load Data in JS
+      // new_dg_data row data
+      {% autoescape off %}
+      var parent_df = {{ parent_df | safe}};
+      {% endautoescape %};
+
+
+      // Create bootstrap table of data
+      $('#dg_parent_table').bootstrapTable({
+          data: parent_df,
+          icons: {
+              refresh: 'fa fa-refresh',
+              toggle: 'fa fa-th-list',
+              columns: 'fa fa-columns',
+              detailOpen: 'fa fa-plus-circle',
+              detailClose: 'fa fa-minus-circle'
+          },
+          columns: [{
+              field: 'stage',
+              title: 'Stage'
+          }, {
+              field: 'pid_fyt_pmy_dpt_cd',
+              title: 'Primary Department'
+          }, {
+              field: 'pid_fyt_pmy_dpt_dsc_tx',
+              title: 'Primary Department Description'
+          }, {
+              field: 'pid_fyt_rec_dpt_cd',
+              title: 'Recap Department'
+          }, {
+              field: 'pid_fyt_rec_dpt_dsc_tx',
+              title: 'Recap Department Description'
+          }, {
+              field: 'pid_fyt_sub_dpt_cd',
+              title: 'Sub-Department'
+          }, {
+              field: 'pid_fyt_sub_dpt_dsc_tx',
+              title: 'Sub-Department Description'
+          }, {
+              field: 'pid_fyt_com_cd',
+              title: 'Commodity'
+          }, {
+              field: 'pid_fyt_com_dsc_tx',
+              title: 'Commodity Description'
+          }, {
+              field: 'pid_fyt_sub_com_cd',
+              title: 'Sub-Commodity'
+          }, {
+              field: 'pid_fyt_sub_com_dsc_tx',
+              title: 'Sub-Commodity Description'
+          },  {
+              field: 'demand_group_code',
+              title: 'Demand Group Code'
+          }, {
+              field: 'demand_group_dsc',
+              title: 'Demand Group Description'
+          }]
+    });
+
+
+
+  })
+
+</script>
+
+
+<script>
+    // Update form content by click in parent table
+    $(function changeContent() {
+        var $result = $('#dg-form-keeper');
+        $('#dg_parent_table').on('click-row.bs.table', function (e, row, $element) {
+            $('.success').removeClass('success');
+            $($element).addClass('success');
+
+            function getSelectedRow() {
+                var index = $('#dg_parent_table').find('tr.success').data('index');
+                return $('#dg_parent_table').bootstrapTable('getData')[index];
+            }
+
+            document.getElementById("input-value-1").value = getSelectedRow().demand_group_code;
+            document.getElementById("input-value-2").value = getSelectedRow().demand_group_dsc;
+        });
+    });
+
+    setTimeout(function(){
+        $("#alert-popup").alert("close");
+        }, 5000);
+
+ </script>
+
+
+
+<!-- Required CSS files -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+
+<!-- JQuery Library JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<!-- Bootstrap Library -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+
+
+<!-- Bootstrap Cookie Library -->
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
+
+<!-- Table Filter JS -->
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+
+
+
+<!-- Flash messages -->
+<div class="row">
+    <div class="col-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" id="alert-popup">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div> <!-- End of Flash messages -->
+
+
+
+
+<!--- Child Table row -->
+<div class="row child-table no-hover">
+
+    <!--- Column of Demand Group Table Card -->
+    <div class="col">
+    <!-- Table of Demand Group Records -->
+        <div class="card-body shadow-lg p-3 mb-5 bg-white rounded">
+            <!--- Demand Group Table -->
+            <table id=dg_child_table"
+
+                   data-click-to-select="true"
+                   data-cookie="true"
+                   data-cookie-id-table="saveId_1"
+
+                   data-unique-id="id_1"
+
+                   class="table table-bordered table-sm" >
+                <thead>
+                    <tr class="thead-light">
+                        <th data-field="pid_fyt_com_cd" scope="col">Commodity Code</th>
+                        <th data-field="pid_fyt_com_dsc_tx" scope="col">Commodity Description</th>
+                        <th data-field="pid_fyt_sub_com_cd" scope="col">Sub-Commodity Code</th>
+                        <th data-field="pid_fyt_sub_com_dsc_tx" scope="col">Sub-Commodity Description</th>
+                        <th>Demand Group Code</th>
+                        <th class="noborder-right">Demand Group Description</th>
+                        <th class="noborder-left noborder-right">&nbsp;</th>
+                        <th class="noborder-left">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in child_df %}
+                        <tr>
+                            <td data-field="pid_fyt_com_cd" class="align-middle" id="form-row-1">{{ row[2] }}</td>
+                            <td data-field="pid_fyt_com_dsc_tx" class="align-middle">{{ row[3] }}</td>
+                            <td data-field="pid_fyt_sub_com_cd" class="align-middle">{{ row[4] }}</td>
+                            <td data-field="pid_fyt_sub_com_dsc_tx" class="align-middle">{{ row[5] }}</td>
+                            <div class="form-check form-check-inline">
+                                <form action="" method="post" enctype="multipart/form-data" class="needs-validation dg-form" id="dg-form-keeper" novalidate>
+                                    {{ form.hidden_tag() }}
+                                    <td>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="input-value-1"
+                                               name="DGCodeInput"
+                                               required
+                                               placeholder={{ dg_code_max }}>
+                                    </td>
+                                    <td class="noborder-right">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="input-value-2"
+                                               name="DGDscInput"
+                                               required
+                                               placeholder={{ row[5] }}>
+                                    </td>
+                                    <td class="text-center noborder-left noborder-right">
+                                        <button action="{{ url_for('add_demand_group', id=row[0]) }}" class="btn submit_edited_dg_button">SUBMIT</button>
+                                    </td>
+                                </form>
+                            </div>
+                            <td class="text-center noborder-left">
+                                <a href="/"><button class="btn home_btn">CANCEL</button></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody> <!--- End of Child Table body -->
+            </table> <!--- End of Child Table -->
+        </div> <!--- End of Child Table card -->
+    </div> <!--- End of Child Table column -->
+</div> <!--- End of Child Table row -->
+
+
+
+
+<br>
+
+
+
+
+<div class="row-2">
+
+    <!--- Column of Demand Group Table Card -->
+    <div class="col">
+    <!-- Table of Demand Group Records -->
+        <div class="card">
+            <div class="card-header">
+            Available Demand Groups
+            </div>
+
+            <div class="card-body">
+                <!--- Demand Group Table -->
+                <table id="dg_parent_table"
+
+                       data-click-to-select="true"
+
+                       data-filter-control="true"
+                       data-cookie="true"
+                       data-cookie-id-table="saveId"
+
+                       data-sortable="true"
+                       data-show-columns="true"
+
+                       class="table table-sm">
+                    <thead>
+                        <tr class="thead-light">
+                            <th data-field="stage" data-filter-control="select" data-visible="true" data-sortable="true">Stage</th>
+                            <th data-field="pid_fyt_pmy_dpt_cd" data-visible="false" data-sortable="true">Primary Department</th>
+                            <th data-field="pid_fyt_pmy_dpt_dsc_tx" data-visible="false">Primary Department Description</th>
+                            <th data-field="pid_fyt_rec_dpt_cd" data-visible="false" data-sortable="true">Recap Department</th>
+                            <th data-field="pid_fyt_rec_dpt_dsc_tx" data-visible="false">Recap Department Description</th>
+                            <th data-field="pid_fyt_sub_dpt_cd" data-visible="false" data-sortable="true">Sub-Department</th>
+                            <th data-field="pid_fyt_sub_dpt_dsc_tx" data-visible="false">Sub-Department Description</th>
+                            <th data-field="pid_fyt_com_cd" data-sortable="true" data-filter-control="select">Commodity</th>
+                            <th data-field="pid_fyt_com_dsc_tx" data-filter-control="input">Commodity Description</th>
+                            <th data-field="pid_fyt_sub_com_cd" data-sortable="true" data-filter-control="select">Sub-Commodity Code</th>
+                            <th data-field="pid_fyt_sub_com_dsc_tx" data-filter-control="input">Sub-Commodity Description</th>
+                            <th data-field="demand_group_code" data-sortable="true" id="dg_code">Demand Group Code</th>
+                            <th data-field="demand_group_dsc" data-sortable="true" id="dg_desc">Demand Group Description</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
