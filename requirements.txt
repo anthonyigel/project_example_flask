@@ -1,0 +1,20 @@
+# Python specific
+pandas
+
+# Flask specific
+Flask
+flask_bootstrap
+flask_moment
+flask_wtf
+flask_table
+flask-sqlalchemy
+Flask-Markdown
+utility
+flask_paginate
+Werkzeug==0.16.1
+wtforms
+sqlalchemy
+pyarrow
+
+gcsfs
+#fsspec
