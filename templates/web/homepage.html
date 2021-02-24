@@ -1,0 +1,38 @@
+{% extends "web/layout_v1.html" %}
+{% block webtitle %}
+    Demand Groups
+{% endblock %}
+{% block title %}
+    Demand Group Upload Portal
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <form action='/upload_success' method="post" enctype="multipart/form-data">
+            <div>
+                <label for="monthseleciton"> What month is the Demand Group data for? </label>
+                <br>
+                <input type="month"
+                       name="submitted_month"
+                       value="submitted_month"
+                       id="submitted_month"
+                       min="2019-01"
+                       max="2021-12"
+                       value="January, 2020"
+                       required>
+                <br>
+                <br>
+                <label for="fileselection"> Select updated Demand Group file to upload</label>
+                <p></p>
+                <input type="file"
+                       name="submitted_file"
+                       value="submitted_file"
+                       id="submitted_file"
+                       accept=".csv"
+                       required>
+                <br>
+                <br>
+                <button class="submit_edited_dg_button" action="{{ url_for('upload_file') }}">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
