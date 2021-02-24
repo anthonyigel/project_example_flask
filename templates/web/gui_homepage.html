@@ -1,0 +1,141 @@
+<!-- Layout Preset -->
+{% extends "web/layout_v1.html" %}
+{% block webtitle %}
+    Demand Groups Upload Portal
+{% endblock %}
+{% block title %}
+    Demand Group Upload Portal
+{% endblock %}
+{% block content %}
+
+
+<script>
+    var $table = $('#dg_main_table')
+
+    setTimeout(function(){
+        $("#alert-popup").alert("close");
+        }, 5000);
+</script>
+
+<!-- Required CSS files -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.css">
+
+
+<!-- JQuery Library JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<!-- Bootstrap Library -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/bootstrap-table.min.js"></script>
+
+
+<!-- Bootstrap Cookie Library -->
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/cookie/bootstrap-table-cookie.min.js"></script>
+
+
+<!-- Table Filter JS -->
+<script src="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/bootstrap-table@1.17.1/dist/extensions/filter-control/bootstrap-table-filter-control.css">
+
+
+
+
+<!-- Flash messages -->
+<div class="row">
+    <div class="col-12">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" id="alert-popup">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</div> <!-- End of Flash messages -->
+
+
+
+ <!-- Start of Table Card Row -->
+<div class="row">
+    <!--- Column of Demand Group Table Card -->
+    <div class="col-10">
+    <!-- Table of Demand Group Records -->
+        <div class="card">
+            <div class="card-header">
+            {{ month }} Demand Groups
+            </div>
+
+            <div class="card-body">
+                <table id=dg_main_table"
+
+                       data-cookie="true"
+                       data-cookie-id-table="saveId"
+
+                       data-toggle="table"
+
+                       data-sortable="true"
+                       data-show-columns="false"
+
+                       data-filter-control="true"
+                       data-unique-id="id"
+
+                       data-pagination="true"
+                       data-pagination-h-align="right"
+                       data-pagination-detail-h-align="left"
+                       data-page-size="25"
+                       data-page-list="[25, 45, 65, 100, ALL]"
+                       class="table table-sm">
+                    <thead>
+                        <tr class="thead-light">
+                            <th scope="col" data-field="id" data-visible="false">ID</th>
+                            <th scope="col" data-field="stage" data-filter-control="select" data-visible="false">Stage</th>
+                            <th scope="col" data-field="pid_fyt_com_cd" data-sortable="true" data-filter-control="select">Commodity Code</th>
+                            <th scope="col" data-field="pid_fyt_com_dsc_tx" data-filter-control="input">Commodity Description</th>
+                            <th scope="col" data-field="pid_fyt_sub_com_cd" data-sortable="true" data-filter-control="select">Sub-Commodity Code</th>
+                            <th scope="col" data-field="pid_fyt_sub_com_dsc_tx" data-filter-control="input" class="noborder-right">Sub-Commodity Description</th>
+                            <th class="noborder-left">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in row_data %}
+                            <tr>
+                                <td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
+                                <td>{{ row[4] }}</td>
+                                <td>{{ row[5] }}</td>
+                                <td class="text-center noborder-left">
+                                    <a href="{{ url_for('add_demand_group', id=row[0]) }}"><mds-button label="Edit"></mds-button></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!--- End Demand Group Table Card -->
+
+    <!--- Column of Demand Group submission Card -->
+    <div class="col-2">
+        <!--- Demand Group submission card -->
+        <div class="card">
+            <!--- Demand Group submission card body-->
+            <div class="card-body">
+                <div class="col align-self-center">
+                    <a href="{{ url_for('submit_dg_updates') }}"><mds-button label="Submit for QA"></mds-button></a>
+                </div>
+            </div> <!--- End of Demand Group submission card body-->
+        </div> <!--- End of Demand Group submission card -->
+    </div> <!--- End of Demand Group submission card column -->
+
+</div> <!--- End of Row-->
+{% endblock %}
